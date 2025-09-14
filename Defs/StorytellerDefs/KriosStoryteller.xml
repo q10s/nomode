@@ -1,0 +1,158 @@
+<Defs>
+<!--  Пример рассказчика на базе StorytellerDef.
+       Переименован, чтобы избежать конфликтов с другими модами.  -->
+<StorytellerDef ParentName="BaseStoryteller">
+<defName>Q10S_NomodeStoryteller</defName>
+<label>nomode</label>
+<description>Экспериментальный рассказчик. Больше давления, меньше передышек. Настройки можно править в этом XML.</description>
+<portraitLarge>UI/Storyteller/Nomode</portraitLarge>
+<portraitTiny>UI/Storyteller/NomodeTiny</portraitTiny>
+<listOrder>45</listOrder>
+<comps>
+<!--  Домашняя карта  -->
+<li Class="StorytellerCompProperties_RandomMain">
+<allowedTargetTags>
+<li>Map_PlayerHome</li>
+</allowedTargetTags>
+<minDaysPassed>1</minDaysPassed>
+<mtbDays>1.35</mtbDays>
+<maxThreatBigIntervalDays>0.5</maxThreatBigIntervalDays>
+<minIncChancePopulationIntentFactor>0.2</minIncChancePopulationIntentFactor>
+<randomPointsFactorRange>0.5~1.5</randomPointsFactorRange>
+<skipThreatBigIfRaidBeacon>true</skipThreatBigIfRaidBeacon>
+<categoryWeights>
+<Misc>8</Misc>
+<ThreatBig>25</ThreatBig>
+<OrbitalVisitor>4</OrbitalVisitor>
+<FactionArrival>5</FactionArrival>
+<ThreatSmall>0.4</ThreatSmall>
+<ShipChunkDrop>0.25</ShipChunkDrop>
+</categoryWeights>
+</li>
+<li Class="StorytellerCompProperties_Disease">
+<category>DiseaseHuman</category>
+<minDaysPassed>0</minDaysPassed>
+</li>
+<li Class="StorytellerCompProperties_Disease">
+<category>DiseaseAnimal</category>
+<minDaysPassed>0</minDaysPassed>
+</li>
+<!--  Специальные угрозы (маяк)  -->
+<li Class="StorytellerCompProperties_ThreatsGenerator">
+<allowedTargetTags>
+<li>Map_RaidBeacon</li>
+</allowedTargetTags>
+<parms>
+<allowedThreats>Raids</allowedThreats>
+<onDays>0.0</onDays>
+<offDays>0.0</offDays>
+<minSpacingDays>0</minSpacingDays>
+<numIncidentsRange>4~10</numIncidentsRange>
+<minThreatPoints>550</minThreatPoints>
+</parms>
+</li>
+<!--  Дружественные рейды  -->
+<li Class="StorytellerCompProperties_FactionInteraction">
+<incident>RaidFriendly</incident>
+<baseIncidentsPerYear>10</baseIncidentsPerYear>
+<minSpacingDays>0.5</minSpacingDays>
+<fullAlliesOnly>true</fullAlliesOnly>
+<minDanger>High</minDanger>
+</li>
+<!--  Караваны / временные карты  -->
+<li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome">
+<category>Misc</category>
+<allowedTargetTags>
+<li>Caravan</li>
+<li>Map_TempIncident</li>
+</allowedTargetTags>
+</li>
+<li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome">
+<category>ThreatSmall</category>
+<applyCaravanVisibility>true</applyCaravanVisibility>
+<allowedTargetTags>
+<li>Caravan</li>
+<li>Map_TempIncident</li>
+</allowedTargetTags>
+</li>
+<li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome">
+<category>ThreatBig</category>
+<applyCaravanVisibility>true</applyCaravanVisibility>
+<allowedTargetTags>
+<li>Caravan</li>
+<li>Map_TempIncident</li>
+</allowedTargetTags>
+</li>
+<!--  Квесты без Royalty  -->
+<li Class="StorytellerCompProperties_RandomQuest">
+<category>GiveQuest</category>
+<allowedTargetTags>
+<li>World</li>
+</allowedTargetTags>
+<onDays>1</onDays>
+<numIncidentsRange>3</numIncidentsRange>
+<acceptFractionByDaysPassedCurve>
+<points>
+<li>(5, 0)</li>
+<li>(30, 1)</li>
+<li>(60, 1)</li>
+</points>
+</acceptFractionByDaysPassedCurve>
+<minSpacingDays>0.2</minSpacingDays>
+<disableIfAnyModActive>
+<li>Ludeon.RimWorld.Royalty</li>
+</disableIfAnyModActive>
+</li>
+<!--  Квесты Royalty  -->
+<li Class="StorytellerCompProperties_RandomQuest">
+<category>GiveQuest</category>
+<allowedTargetTags>
+<li>World</li>
+</allowedTargetTags>
+<onDays>12</onDays>
+<numIncidentsRange>1~3</numIncidentsRange>
+<acceptFractionByDaysPassedCurve>
+<points>
+<li>(5, 0)</li>
+<li>(11, 1)</li>
+<li>(8, 0)</li>
+<li>(15, 1)</li>
+</points>
+</acceptFractionByDaysPassedCurve>
+<minSpacingDays>0.2</minSpacingDays>
+<enableIfAnyModActive>
+<li>Ludeon.RimWorld.Royalty</li>
+</enableIfAnyModActive>
+</li>
+<!--  Мировые прочие инциденты  -->
+<li Class="StorytellerCompProperties_CategoryMTB">
+<category>Misc</category>
+<allowedTargetTags>
+<li>World</li>
+</allowedTargetTags>
+<minDaysPassed>1</minDaysPassed>
+<mtbDays>15</mtbDays>
+</li>
+<!--  Триггер-событие  -->
+<li Class="StorytellerCompProperties_Triggered">
+<incident>StrangerInBlackJoin</incident>
+<delayTicks>180</delayTicks>
+</li>
+</comps>
+<populationIntentFactorFromPopCurve>
+<points>
+<li>0,16.0</li>
+<li>2,4.0</li>
+<li>8,4.0</li>
+<li>14,2</li>
+<li>22,0.0</li>
+<li>60,-2.0</li>
+<li>120,-2.0</li>
+<li>240,0.0</li>
+<li>480,-2.0</li>
+<li>960,-2.0</li>
+<li>1920,-2.0</li>
+</points>
+</populationIntentFactorFromPopCurve>
+</StorytellerDef>
+</Defs>
