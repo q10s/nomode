@@ -1,0 +1,9 @@
+<ModMetaData>
+<name>Nomode</name>
+<packageId>q10s.nomode</packageId>
+<author>Krios</author>
+<supportedVersions>
+<li>1.5</li>
+</supportedVersions>
+<description>Минимальный каркас мода RimWorld: рассказчик + структура папок. Добавь ассеты в Textures/UI/Storyteller и расширяй Defs/.</description>
+</ModMetaData>
